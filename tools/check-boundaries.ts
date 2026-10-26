@@ -53,15 +53,12 @@ export function findViolations(root: string): Violation[] {
 
       const target = path.resolve(path.dirname(file), importPath);
 
-      // Allow imports from src/platform.
+      
       if (target.startsWith(platformDir + path.sep)) continue;
 
-      // Allow imports inside the current module.
       const currentDir = path.join(modulesDir, currentModule);
 
       if (target.startsWith(currentDir + path.sep)) continue;
-
-      // Allow another module's index.ts only.
       if (
         target.startsWith(modulesDir + path.sep) &&
         path.basename(target) === 'index.ts'
